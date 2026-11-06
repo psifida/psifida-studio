@@ -4,8 +4,8 @@
  */
 
 export const site = {
-  name: "Ψηφίδα Studio",
-  latinName: "Psifida Studio",
+  name: "Ψηφίδα Web Studio",
+  latinName: "Psifida Web Studio",
   owner: "Χριστίνα - Μαρία Νέστωρ",
   tagline: "Η ψηφιακή σου εικόνα, ψηφίδα ψηφίδα.",
   role: "Ιστοσελίδες και εφαρμογές για μικρές επιχειρήσεις",
@@ -14,7 +14,7 @@ export const site = {
   phone: "693 180 5030",
   phoneHref: "+306931805030",
   address: {
-    street: "Μερόπης 12",
+    street: "Μερόπης 7",
     city: "Καλαμάτα",
     postalCode: "24134",
     country: "GR",
