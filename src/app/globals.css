@@ -1,0 +1,386 @@
+@import "tailwindcss";
+
+/* ============================================================
+   Ψηφίδα Studio — design tokens (οδηγός ταυτότητας v1)
+   Άμμος ~60% · Πετρόλ ~25% · Μελάνι ~10% · Τερακότα ~5%
+   ============================================================ */
+@theme {
+  --color-sand: #f5efe6;
+  --color-paper: #fffdf9;
+  --color-petrol: #1e4e5a;
+  --color-petrol-deep: #16404c;
+  --color-terra: #d96c4f;
+  --color-terra-deep: #c55b3f;
+  --color-terra-soft: #f0b8a4;
+  --color-on-terra: #40170b;
+  --color-ink: #2a2d31;
+  --color-muted: #6b6558;
+  --color-line: #e7decb;
+  --color-line-dark: #2e5b67;
+  --color-on-dark: #dce6e4;
+  --color-on-dark-muted: #a9c2be;
+
+  --font-display: "Commissioner", system-ui, sans-serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+
+  --container-brand: 1120px;
+
+  /* Το μενού γίνεται burger κάτω από αυτό το πλάτος (821px) */
+  --breakpoint-bar: 51.3125rem;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 84px;
+  }
+
+  body {
+    background-color: var(--color-sand);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    color: var(--color-petrol);
+    line-height: 1.12;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  h2 {
+    font-size: clamp(1.7rem, 3.4vw, 2.4rem);
+    margin-bottom: 0.6em;
+  }
+
+  h3 {
+    font-size: 1.22rem;
+    font-weight: 500;
+    letter-spacing: 0;
+  }
+
+  p {
+    max-width: 62ch;
+    text-wrap: pretty;
+  }
+
+  img,
+  svg {
+    display: block;
+  }
+
+  a {
+    color: var(--color-petrol);
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-terra);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+}
+
+@layer components {
+  .container-brand {
+    max-width: var(--container-brand);
+    margin-inline: auto;
+    padding-inline: clamp(1.1rem, 4vw, 2rem);
+  }
+
+  /* ---- Η ψηφίδα: το σημείο στίξης της ταυτότητας ---- */
+  .tess {
+    display: inline-block;
+    width: 0.34em;
+    height: 0.34em;
+    background: var(--color-terra);
+    border-radius: 23%;
+    transform: rotate(10deg);
+    vertical-align: baseline;
+    margin-left: 0.16em;
+    flex: none;
+  }
+
+  .rv .tess {
+    transform: rotate(120deg) scale(0);
+  }
+
+  .rv.in .tess {
+    animation: tess-snap 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.15s both;
+  }
+
+  /* Λίστες με ψηφίδα αντί για κουκίδα */
+  .tl {
+    list-style: none;
+  }
+
+  .tl li {
+    position: relative;
+    padding-left: 1.35em;
+    margin-block: 0.4em;
+  }
+
+  .tl li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.48em;
+    width: 0.55em;
+    height: 0.55em;
+    background: var(--color-terra);
+    border-radius: 23%;
+    transform: rotate(10deg);
+  }
+
+  /* ---- Σύστημα εμφάνισης με το scroll ---- */
+  .rv {
+    opacity: 0;
+    transform: translateY(22px);
+    transition:
+      opacity 0.7s ease,
+      transform 0.7s cubic-bezier(0.22, 0.9, 0.3, 1);
+    transition-delay: var(--d, 0s);
+  }
+
+  .rv.in {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* ---- Κουμπιά ---- */
+  .btn {
+    display: inline-block;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 1.03rem;
+    text-decoration: none;
+    border-radius: 12px;
+    padding: 0.95rem 1.55rem;
+    border: 0;
+    cursor: pointer;
+    transition:
+      transform 0.18s ease,
+      background 0.18s ease,
+      border-color 0.18s;
+  }
+
+  .btn-primary {
+    background: var(--color-terra);
+    color: var(--color-on-terra);
+  }
+
+  .btn-primary:hover {
+    background: var(--color-terra-deep);
+    transform: translateY(-2px);
+  }
+
+  .btn-ghost {
+    background: transparent;
+    border: 1.6px solid var(--color-petrol);
+    color: var(--color-petrol);
+  }
+
+  .btn-ghost:hover {
+    background: rgb(30 78 90 / 0.07);
+    transform: translateY(-2px);
+  }
+
+  /* ---- Κάρτα ---- */
+  .card {
+    position: relative;
+    background: var(--color-paper);
+    border: 1px solid var(--color-line);
+    border-radius: 18px;
+    padding: 1.7rem 1.6rem 1.6rem;
+    display: flex;
+    flex-direction: column;
+    transition:
+      transform 0.25s ease,
+      border-color 0.25s,
+      box-shadow 0.25s;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    border-color: #cdbf9f;
+    box-shadow: 0 18px 34px -26px rgb(30 78 90 / 0.45);
+  }
+
+  /* Πλέγμα καρτών: όλες οι κάρτες μιας σειράς ευθυγραμμίζουν τίτλο, περιγραφή,
+     τιμή και λίστα μεταξύ τους (subgrid). Χωρίς υποστήριξη subgrid, οι κάρτες
+     απλώς στοιχίζονται από πάνω — τίποτα δεν σπάει. */
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.2rem;
+  }
+
+  .cards--wide {
+    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  }
+
+  @supports (grid-template-rows: subgrid) {
+    .cards--rows-4 > .card {
+      display: grid;
+      grid-template-rows: subgrid;
+      grid-row: span 4;
+      align-content: start;
+    }
+
+    .cards--rows-3 > .card {
+      display: grid;
+      grid-template-rows: subgrid;
+      grid-row: span 3;
+      align-content: start;
+    }
+  }
+
+  .card-price {
+    font-family: var(--font-display);
+    font-weight: 700;
+    color: var(--color-petrol);
+    font-size: 1.55rem;
+    margin: 0.9rem 0 0.2rem;
+  }
+
+  .card-price small {
+    display: block;
+    font-family: var(--font-sans);
+    font-weight: 400;
+    font-size: 0.85rem;
+    color: var(--color-muted);
+  }
+
+  .kicker {
+    font-family: var(--font-display);
+    font-weight: 500;
+    color: var(--color-terra-deep);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    margin-bottom: 0.7rem;
+  }
+
+  /* ---- Σκούρες ενότητες (πετρόλ) ---- */
+  .dark-section {
+    background: var(--color-petrol);
+    color: var(--color-sand);
+  }
+
+  .dark-section h2,
+  .dark-section h3 {
+    color: var(--color-sand);
+  }
+
+  .dark-section p {
+    color: var(--color-on-dark);
+  }
+
+  .dark-section a {
+    color: var(--color-sand);
+  }
+
+  /* ---- Φόντο ψηφιδωτού για το hero (fallback χωρίς WebGL) ---- */
+  .hero-tile {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96'%3E%3Crect x='34' y='34' width='26' height='26' rx='6' fill='%231E4E5A' opacity='.05' transform='rotate(10 47 47)'/%3E%3C/svg%3E");
+  }
+
+  /* ---- FAQ ---- */
+  .faq-list details {
+    border-top: 1px solid var(--color-line);
+  }
+
+  .faq-list details:last-child {
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  .faq-list summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    padding: 1.15rem 0.2rem;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 1.08rem;
+    color: var(--color-petrol);
+  }
+
+  .faq-list summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-list summary i {
+    width: 0.62em;
+    height: 0.62em;
+    background: var(--color-terra);
+    border-radius: 23%;
+    transform: rotate(10deg);
+    transition: transform 0.3s;
+    flex: none;
+  }
+
+  .faq-list details[open] summary i {
+    transform: rotate(55deg);
+  }
+
+  .faq-list details p {
+    padding: 0 0.2rem 1.2rem 1.85rem;
+    color: var(--color-ink);
+    font-size: 0.98rem;
+  }
+
+  /* ---- Φόρμα ---- */
+  .form-field {
+    width: 100%;
+    background: #f8f3e9;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    padding: 0.85rem 0.95rem;
+    font: inherit;
+    color: var(--color-ink);
+    margin-bottom: 1rem;
+  }
+
+  .form-field:focus {
+    outline: none;
+    border-color: var(--color-terra);
+    box-shadow: 0 0 0 3px rgb(217 108 79 / 0.28);
+  }
+}
+
+@keyframes tess-snap {
+  0% {
+    transform: rotate(120deg) scale(0);
+  }
+  70% {
+    transform: rotate(4deg) scale(1.18);
+  }
+  100% {
+    transform: rotate(10deg) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .rv {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .rv .tess,
+  .rv.in .tess {
+    animation: none;
+    transform: rotate(10deg) scale(1);
+  }
+}
